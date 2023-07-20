@@ -16,6 +16,16 @@ is_valid_version() {
   fi
 }
 
+increment_version() {
+  if is_valid_version "$1"; then
+    readarray -d . -t strarr <<< "$1"
+    echo "${strarr[0]}.${strarr[1]}.$(( ${strarr[2]} + 1 ))" > /home/ali/repos/shell/version.txt
+  else
+    echo 'Unable to increment version number' >&2
+    exit 1
+  fi
+}
+
 if [ -z "$server" ]; then
     echo 'Missing -s (specify prod server)' >&2
     exit 1
@@ -25,6 +35,7 @@ if [ ! -z "$version" ] && is_valid_version "$version"; then
     echo "$version" > /home/ali/repos/shell/version.txt
 else
     version=$(cat /home/ali/repos/shell/version.txt)
+    increment_version "$version"
 fi
 
 git add .
