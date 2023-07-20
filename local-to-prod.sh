@@ -22,17 +22,15 @@ if [ -z "$server" ]; then
 fi
 
 if [ ! -z "$version" ] && is_valid_version "$version"; then
-    echo "$version" > version.txt
+    echo "$version" > /home/ali/repos/shell/version.txt
 else
-    version=$(cat version.txt)
+    version=$(cat /home/ali/repos/shell/version.txt)
 fi
 
-# git add .
+git add .
 
-# git commit -m 'release v"$version"'
+git commit -m "release v$version"
 
-# git push origin main
+git push origin main
 
-# ssh $server
-
-# git pull origin main
+ssh $server "git pull origin main"
