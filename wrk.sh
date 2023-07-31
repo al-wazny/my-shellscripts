@@ -30,7 +30,6 @@ startWorkEnv() {
 	sleep 3
 	moveToNextWorkspace
 	execWithoutOutput phpstorm
-	moveToNextWorkspace
 	startProject
 }
 
